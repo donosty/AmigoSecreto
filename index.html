@@ -11,10 +11,15 @@
 </head>
 
 <body>
+
+    <video id="video-fondo" autoplay muted loop>
+        <source src="assets/2421545-hd_1920_1080_30fps.mp4" type="video/mp4" />
+    </video>
+
     <main class="main-content">
         <header class="header-banner">
             <h1 class="main-title">Amigo Secreto</h1>
-            <img src="assets/amigo-secreto.png" alt="Imagen representativa de amigo secreto">
+            <img src="assets/avatar.jpg" alt="Imagen representativa de amigo secreto">
         </header>
         
         <section class="input-section">
@@ -33,13 +38,18 @@
             </ul>
 
             <div class="container-alerta oculto" id="alerta">
-                <p>Nombre no valido</p>
+                <p id="texto-alerta"></p>
             </div>
 
             <div class="button-container">
-                <button class="button-draw" aria-label="Sortear amigo secreto">
+                <button class="button-draw" id="boton-sorteo" aria-label="Sortear amigo secreto">
                     <img src="assets/play_circle_outline.png" alt="Ícono para sortear">
                     Sortear amigo
+                </button>
+
+                <button class="button-draw" id="boton-borrar" aria-label="Sortear amigo secreto">
+                    <img src="assets/play_circle_outline.png" alt="Ícono para sortear">
+                    Borrar amigos
                 </button>
             </div>
         </section>

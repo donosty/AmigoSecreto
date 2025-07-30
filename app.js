@@ -4,11 +4,23 @@ let amigos = []
 const botonAnadir = document.querySelector('#add-amigo')
 const alerta = document.querySelector('#alerta')
 const seccionAmigos = document.querySelector('#listaAmigos')
+const botonSorteo = document.querySelector('#boton-sorteo')
+const textoAlerta = document.querySelector('#texto-alerta')
+const seccionSecreto = document.querySelector('#resultado')
+const botonBorrar = document.querySelector('#boton-borrar')
 
 cargarEventListeners();
 function cargarEventListeners(){
 
     botonAnadir.addEventListener('click', anadirAmigo)
+    botonSorteo.addEventListener('click', sortearAmigo)
+
+    botonBorrar.addEventListener('click', () =>{
+
+        seccionAmigos.innerHTML = ''
+        seccionSecreto.innerHTML=''
+        amigos = []
+    })
 }
 
 function anadirAmigo(e){
@@ -19,7 +31,7 @@ function anadirAmigo(e){
     
     if(nombre.value.trim() == ''){
 
-        crearAlerta()
+        crearAlerta("Nombre no valido")
         return
     }
 
@@ -29,9 +41,10 @@ function anadirAmigo(e){
 
 }
 
-function crearAlerta(){
+function crearAlerta(mensaje){
 
     alerta.classList.remove('oculto')
+    textoAlerta.textContent = mensaje
 
     setTimeout(() =>{
 
@@ -41,11 +54,18 @@ function crearAlerta(){
 
 function mostrarAmigos(){
 
-    const li = document.createElement('li')
+    seccionSecreto.innerHTML = ''
+
+    if(amigos.length > 0){
+
+        seccionAmigos.innerHTML = ''
+    }
 
     for(const amigo of amigos){
 
+        const li = document.createElement('li')
         li.textContent = amigo
+        console.log(amigo)
         seccionAmigos.appendChild(li)
     }
 
@@ -53,4 +73,22 @@ function mostrarAmigos(){
 
 function sortearAmigo(){
     
+    let longitud = amigos.length
+
+    if(longitud == 0){
+
+        crearAlerta("No hay amigos en la fila")
+        return
+    }
+
+    let sorteo = Math.floor(Math.random() * longitud) + 1
+
+    seccionAmigos.innerHTML = ''
+    let amigoSecreto = amigos[sorteo-1]
+
+    seccionSecreto.innerHTML = ''
+
+    const li = document.createElement('li')
+    li.textContent = amigoSecreto
+    seccionSecreto.appendChild(li)
 }
